@@ -28,8 +28,28 @@ function tuesday_box(){
     tuesday[`style`][`backgroundColor`] = `purple`;
 }
 function wednesday_box(){
-    let tuesday = document.getElementById(`box_3`);
+    let tuesday = document.getElementById(`box_4`);
     tuesday[`style`][`height`] =`100px`;
     tuesday[`style`][`width`] =`100px`;
     tuesday[`style`][`backgroundColor`] = `green`;
 }
+
+function refreshAt(hours, minutes, seconds) {
+    var now = new Date();
+    var then = new Date();
+
+    if(now.getHours() > hours ||
+        (now.getHours() == hours && now.getMinutes() > minutes) ||
+        now.getHours() == hours && now.getMinutes() == minutes && now.getSeconds() >= seconds) {
+        then.setDate(now.getDate() + 1);
+    }
+    then.setHours(hours);
+    then.setMinutes(minutes);
+    then.setSeconds(seconds);
+
+    var timeout = (then.getTime() - now.getTime());
+    setTimeout(function() { window.location.reload(true); }, timeout);
+}
+
+//refresh the page at 23:00:00
+refreshAt(23,00,00);
